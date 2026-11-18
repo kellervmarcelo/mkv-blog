@@ -1,5 +1,6 @@
 "use client";
 
+import ProductCard from "@/components/ProductCard";
 import { ProductType } from "@/models/product";
 import { useEffect, useState } from "react";
 
@@ -21,9 +22,9 @@ export default function Home() {
   console.log(products);
 
   return (
-    <div>
+    <div className="grid grid-cols-1 sm:grid-cols-2">
       {products?.map((product) => {
-        return <li key={product.id}>{product.title}</li>;
+        return <ProductCard product={product} key={product.id} />;
       })}
     </div>
   );
