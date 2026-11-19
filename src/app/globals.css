@@ -7,6 +7,10 @@
 :root {
   --font-title: "Space Grotesk", sans-serif;
   --font-text: "Inter", sans-serif;
+  --color-ink: #111114;
+  --color-paper: #fafaf7;
+  --color-lime: #d4ff3a;
+  --color-grafite: #3f3f46;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);

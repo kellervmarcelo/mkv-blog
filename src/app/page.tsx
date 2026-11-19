@@ -19,10 +19,8 @@ export default function Home() {
     getProducts();
   }, []);
 
-  console.log(products);
-
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
       {products?.map((product) => {
         return <ProductCard product={product} key={product.id} />;
       })}
