@@ -8,6 +8,7 @@ type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
+      prefetch={false}
       href="/"
       className="max-w-70.75 bg-white my-4 rounded-xl border border-[#E4E4E7]"
     >

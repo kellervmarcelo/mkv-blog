@@ -22,16 +22,16 @@ export default function Header() {
         <NavigationMenu>
           <NavigationMenuList className="flex gap-x-6 text-sm font-medium">
             <NavigationMenuItem>
-              <NavigationMenuLink render={<Link href="/">Início</Link>} />
+              <NavigationMenuLink render={<Link prefetch={false} href="/">Início</Link>} />
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink
-                render={<Link href="/products">Produtos</Link>}
+                render={<Link prefetch={false} href="/products">Produtos</Link>}
               />
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink
-                render={<Link href="/offers">Ofertas</Link>}
+                render={<Link prefetch={false} href="/offers">Ofertas</Link>}
               />
             </NavigationMenuItem>
           </NavigationMenuList>
