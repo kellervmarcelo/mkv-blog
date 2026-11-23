@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { mockCategories } from "@/mocks";
+import { mockCategories } from "@/mocks/categories";
 
 import Logo from "../Logo";
 

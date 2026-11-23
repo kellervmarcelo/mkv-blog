@@ -7,7 +7,8 @@ import ProductCard from "@/components/ProductCard";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { mockCategories, mockProducts } from "@/mocks";
+import { mockProducts } from "@/mocks";
+import { mockCategories } from "@/mocks/categories";
 
 const SORT_OPTIONS = ["Relevância", "Menor preço", "Maior preço", "Melhor avaliação", "Maior desconto"];
 const PAGES = [1, 2, 3, 4, 5, 6];

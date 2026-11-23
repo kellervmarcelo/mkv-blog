@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import ProductCategory from "@/components/ProductCategory";
-import { mockCategories } from "@/mocks";
+import { mockCategories } from "@/mocks/categories";
 import { ProductType } from "@/models/product";
 
 function SectionHeader({ title, linkLabel }: { title: string; linkLabel: string }) {
