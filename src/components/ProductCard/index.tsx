@@ -1,35 +1,72 @@
-import { ProductType } from "@/models/product";
+import { StarIcon } from "lucide-react";
 import Link from "next/link";
+
+import { cn } from "@/lib/utils";
+import { ProductType } from "@/models/product";
 
 type ProductCardProps = {
   product: ProductType;
+  showDiscount?: boolean;
+  compactOnMobile?: boolean;
+  className?: string;
 };
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  showDiscount = true,
+  compactOnMobile = false,
+  className,
+}: ProductCardProps) {
   return (
     <Link
       prefetch={false}
-      href="/"
-      className="max-w-70.75 bg-white my-4 rounded-xl border border-[#E4E4E7]"
+      href="/products/88"
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-xl border bg-card transition-colors duration-300 outline-none hover:border-zinc-300 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 motion-reduce:transition-none",
+        className,
+      )}
     >
-      <div className="relative">
-        <span className="text-xs font-bold bg-lime py-0.75 px-2.5 rounded-full absolute top-3 left-3">
-          -{Math.ceil(product.discountPercentage)}%
-        </span>
-        <img src={product.thumbnail} alt="Product image" />
+      <div className="relative overflow-hidden bg-image">
+        <img
+          src={product.thumbnail}
+          alt={product.title}
+          className="block w-full transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transition-none"
+        />
+        {showDiscount && (
+          <span className="absolute top-2 left-2 rounded-full bg-brand px-2.5 py-0.5 text-xs font-bold text-brand-foreground md:top-3 md:left-3">
+            -{Math.ceil(product.discountPercentage)}%
+          </span>
+        )}
       </div>
 
-      <div className="flex flex-col px-4.5 pt-3.5 pb-4 border-t">
-        <small className="text-xs text-[#5B5B66]">{product?.brand}</small>
-        <p className="text-[15px] font-semibold">{product.title}</p>
-        <p className="text-xs">★ {product.rating}</p>
-        <div className="flex gap-1 items-center mt-2">
-          <p className="text-xl font-title font-semibold">
-            US$ {product.price}
-          </p>
-          <span className="text-xs line-through font-medium text-[#5B5B66]">
-            US$ 899,99
-          </span>
+      <div className="flex flex-col gap-1 p-3 md:px-4 md:pt-3 md:pb-4">
+        <span className={cn("text-xs text-muted-foreground", compactOnMobile && "hidden md:inline")}>
+          {product.brand}
+        </span>
+        <h3 className="text-sm leading-snug font-semibold group-hover:underline group-hover:underline-offset-4 md:text-base">
+          {product.title}
+        </h3>
+        <span
+          className={cn(
+            "items-center gap-1 text-xs text-zinc-700 md:text-sm",
+            compactOnMobile ? "hidden md:flex" : "flex",
+          )}
+        >
+          <StarIcon className="size-3.5 fill-current md:size-4" aria-hidden />
+          {product.rating}
+        </span>
+        <div className="mt-1 flex flex-col md:flex-row md:flex-wrap md:items-baseline md:gap-2">
+          <span className="font-display text-lg font-bold md:text-xl">US$ {product.price}</span>
+          {showDiscount && (
+            <span
+              className={cn(
+                "text-xs text-muted-foreground line-through md:text-sm",
+                compactOnMobile && "hidden md:inline",
+              )}
+            >
+              US$ 899,99
+            </span>
+          )}
         </div>
       </div>
     </Link>

@@ -2,7 +2,7 @@
 
 E-commerce de estudos feito com Next.js e React para responder, com números, a uma pergunta: **quanto cada boa prática de performance realmente melhora a experiência do usuário?**
 
-> **Status:** Etapa 0, construção da versão naive. As métricas ainda não foram coletadas.
+> **Status:** Etapa 0. A parte visual da loja está pronta, a lógica ainda será implementada, e as métricas não foram coletadas.
 
 ## A ideia
 
@@ -19,6 +19,7 @@ Muitos projetos já nascem otimizados, o que esconde o impacto de cada decisão.
 - `next/font`: as fontes vêm de um `<link>` para o Google Fonts.
 - Cache Components e Partial Prefetching.
 - Prefetch dos links.
+- Skeletons, estados de erro da API e espaço reservado para imagens, que entram na Etapa 7.
 
 O `lucide-react` é a exceção, porque o Next o otimiza automaticamente e não oferece opção para desligar.
 
@@ -68,6 +69,7 @@ src/
   components/   componentes da loja
     ui/         componentes gerados pelo shadcn
   lib/          utilitários
+  mocks/        dados de exemplo das telas
   models/       tipos de domínio
 ```
 

@@ -68,16 +68,18 @@ npx next analyze     # analisador de bundle em http://localhost:4000
 src/
   app/                  rotas (App Router), layout raiz e globals.css
     page.tsx            home: Hero + lista de produtos
-    cart/               carrinho (placeholder)
-    products/           listagem (placeholder)
-    products/[id]/      detalhe do produto (placeholder)
+    cart/               carrinho (só visual)
+    products/           listagem (só visual)
+    products/[id]/      detalhe do produto (só visual)
+    not-found.tsx       página 404
   components/           componentes da loja, um por pasta (Nome/index.tsx)
     ui/                 componentes gerados pelo shadcn
   lib/utils.ts          reexporta `cn`
+  mocks/                dados de exemplo das telas
   models/               tipos de domínio (produto e carrinho)
 ```
 
-O alias `@/*` aponta para `src/*`. Os tokens de design ficam em `src/app/globals.css`: `ink`, `paper`, `lime`, `grafite` e as fontes `font-title` e `font-text`.
+O alias `@/*` aponta para `src/*`. Os tokens de design ficam em `src/app/globals.css`, como variáveis do shadcn mais `brand`, `success`, `destructive-soft` e `image`. As fontes são `font-sans` e `font-display`.
 
 ## Estado atual do baseline
 
@@ -85,16 +87,16 @@ O alias `@/*` aponta para `src/*`. Os tokens de design ficam em `src/app/globals
 
 | Prática | Onde | Métrica mais afetada |
 | --- | --- | --- |
-| `<img>` sem `width`/`height`, `sizes` ou lazy loading | `src/components/ProductCard/index.tsx` | LCP, CLS |
+| `<img>` sem `width`/`height`, `sizes` ou lazy loading | `ProductCard`, `Hero`, `ProductDetail`, `cart/page.tsx` | LCP, CLS |
 | Fetch no cliente com `useEffect`, sem loading, erro ou cache | `src/app/page.tsx` | LCP, CLS |
 | Home inteira como Client Component | `src/app/page.tsx` | TBT, INP |
 | `"use client"` sem necessidade | `Logo`, `products/page.tsx`, `products/[id]/page.tsx` | TBT, INP |
-| Lista carregada sem espaço reservado | `src/app/page.tsx` | CLS |
+| Listas e imagens sem espaço reservado (o design pede altura fixa, adiada para a Etapa 7) | `ProductCard`, `Hero`, `ProductDetail` | CLS |
 | Google Fonts via `<link>` bloqueante, com vários eixos | `src/app/layout.tsx` | FCP, LCP, CLS |
 | Fontes sem `next/font`, servidas por terceiros | `src/app/layout.tsx` | FCP, LCP, CLS |
 | `cacheComponents` e `partialPrefetching` desativados | `next.config.ts` | TTFB, navegação |
-| `prefetch={false}` em todos os `next/link` | `Header`, `Footer`, `Hero`, `ProductCard` | Navegação |
-| Todos os 30 produtos da API, com todos os campos | `src/app/page.tsx` | LCP |
+| `prefetch={false}` em todos os `next/link` | Todos os componentes e páginas | Navegação |
+| Todos os 30 produtos da API, com todos os campos, para exibir 8 | `src/app/page.tsx` | LCP |
 
 ### Limitações do baseline
 
@@ -106,17 +108,17 @@ O autor decidiu desativar as otimizações do Next antes da primeira medição. 
 
 ### Pendências funcionais (não são otimizações)
 
-- `/offers` é linkada no Header e no Footer, mas a rota não existe.
-- As páginas de carrinho, listagem e detalhe são placeholders.
-- `src/components/ProductCategory/index.tsx` está vazio.
-- `ProductCard` aponta para `/` e exibe o preço antigo fixo `US$ 899,99`.
-- O produto do `Hero` é fixo, e seus links usam `href="#"`.
-- O contador do carrinho no `Header` é fixo em `4`.
-- `Footer` usa a tag `<header>`.
-- `Logo` renderiza um `<h1>`, então a home tem três `<h1>`.
-- `Header` tem a classe inválida `border-[##E4E4E7]`.
-- `layout.tsx` ainda usa o título e a descrição padrão do create-next-app.
-- O build avisa sobre um `package-lock.json` solto em `C:\Users\marce`.
+As telas são **só visuais**. O autor vai implementar a lógica em React para praticar, então **não implemente lógica sem ele pedir**.
+
+- Listagem, produto e carrinho usam dados fixos de `src/mocks`. A Home mantém o fetch original, e suas seções só fatiam a lista.
+- Busca, filtros, ordenação, paginação, galeria, quantidade, adicionar, remover, cupom e checkout não têm comportamento.
+- Preço com desconto, contador do carrinho e totais são valores fixos ou brutos da API. O preço antigo do `ProductCard` segue fixo em `US$ 899,99`.
+- Todo card aponta para `/products/88`, e `/products/[id]` sempre mostra o mesmo produto.
+- "Ofertas" aponta para `/products`, e a rota `/offers` não existe.
+- Os estados do canvas (vazio, erro, esgotado, estoque baixo, avisos, micro-interações de carrinho) ainda não foram implementados.
+- Os favicons do design ainda não foram exportados.
+- `layout.tsx` ainda usa o título e a descrição padrão do create-next-app (Etapa 8).
+- O build avisa sobre um `package-lock.json` solto em `C:Usersmarce`.
 
 ## Protocolo de medição
 
