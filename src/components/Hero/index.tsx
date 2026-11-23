@@ -8,7 +8,7 @@ export default function Hero() {
           Destaque
         </small>
         <h1 className="font-title text-[56px] leading-[1.02] tracking-tighter font-bold">
-          Tudo em um só lugar. Do tênis ao notebook.
+          Tudo em um só lugar. <br /> Do tênis ao notebook.
         </h1>
         <p className="text-[#D4D4D8] max-w-115">
           Calçados, roupas, acessórios, eletrônicos e perfumes, com desconto em
@@ -17,12 +17,14 @@ export default function Hero() {
 
         <div className="flex gap-3">
           <Link
+            prefetch={false}
             className="h-12 px-5.5 bg-lime rounded-sm text-ink font-semibold text-[15px] flex items-center"
             href="#"
           >
             Ver produtos
           </Link>
           <Link
+            prefetch={false}
             className="h-12 px-5.5 bg-transparent rounded-sm text-paper border border-[#52525B] font-semibold text-[15px] flex items-center"
             href="#"
           >
