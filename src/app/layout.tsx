@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { cn } from "@/lib/utils";
 import Container from "@/components/Container";
 
 export const metadata: Metadata = {
@@ -13,15 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="pt-br"
-      className={cn(
-        "h-full",
-        "antialiased",
-        "font-sans",
-        "text-ink",
-      )}
-    >
+    <html lang="pt-br" className="h-full">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -35,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-paper text-ink">
+      <body className="flex min-h-full flex-col">
         <Header />
         <Container>{children}</Container>
         <Footer />
