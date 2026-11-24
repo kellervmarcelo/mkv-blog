@@ -3,6 +3,11 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { ProductType } from "@/models/product";
+import {
+  getDiscountBadge,
+  getFormattedPrice,
+  getPriceWithDiscount,
+} from "@/lib/price";
 
 type ProductCardProps = {
   product: ProductType;
@@ -17,6 +22,10 @@ export default function ProductCard({
   compactOnMobile = false,
   className,
 }: ProductCardProps) {
+  const discountBadge = showDiscount
+    ? getDiscountBadge(product.discountPercentage)
+    : null;
+
   return (
     <Link
       prefetch={false}
@@ -32,15 +41,20 @@ export default function ProductCard({
           alt={product.title}
           className="block w-full transition-transform duration-300 ease-out group-hover:scale-105 motion-reduce:transition-none"
         />
-        {showDiscount && (
+        {discountBadge !== null && (
           <span className="absolute top-2 left-2 rounded-full bg-brand px-2.5 py-0.5 text-xs font-bold text-brand-foreground md:top-3 md:left-3">
-            -{Math.ceil(product.discountPercentage)}%
+            -{discountBadge}%
           </span>
         )}
       </div>
 
       <div className="flex flex-col gap-1 p-3 md:px-4 md:pt-3 md:pb-4">
-        <span className={cn("text-xs text-muted-foreground", compactOnMobile && "hidden md:inline")}>
+        <span
+          className={cn(
+            "text-xs text-muted-foreground",
+            compactOnMobile && "hidden md:inline",
+          )}
+        >
           {product.brand}
         </span>
         <h3 className="text-sm leading-snug font-semibold group-hover:underline group-hover:underline-offset-4 md:text-base">
@@ -56,15 +70,19 @@ export default function ProductCard({
           {product.rating}
         </span>
         <div className="mt-1 flex flex-col md:flex-row md:flex-wrap md:items-baseline md:gap-2">
-          <span className="font-display text-lg font-bold md:text-xl">US$ {product.price}</span>
-          {showDiscount && (
+          <span className="font-display text-lg font-bold md:text-xl">
+            {getFormattedPrice(
+              getPriceWithDiscount(product.price, product.discountPercentage),
+            )}
+          </span>
+          {discountBadge !== null && (
             <span
               className={cn(
                 "text-xs text-muted-foreground line-through md:text-sm",
                 compactOnMobile && "hidden md:inline",
               )}
             >
-              US$ 899,99
+              {getFormattedPrice(product.price)}
             </span>
           )}
         </div>
