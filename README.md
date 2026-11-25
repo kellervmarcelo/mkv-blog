@@ -34,7 +34,7 @@ O `lucide-react` é a exceção, porque o Next o otimiza automaticamente e não 
 | Componentes | [shadcn](https://ui.shadcn.com) com [Base UI](https://base-ui.com) |
 | Ícones | [Lucide](https://lucide.dev) |
 | Dados | [DummyJSON](https://dummyjson.com/docs/products) |
-| Qualidade | ESLint 9 com as regras `core-web-vitals` do Next |
+| Qualidade | ESLint 9 com as regras `core-web-vitals` do Next, Prettier 3 |
 
 ## Como rodar
 
@@ -58,6 +58,8 @@ Depois, abra [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Gera o build de produção |
 | `npm run start` | Serve o build de produção |
 | `npm run lint` | Executa o ESLint |
+| `npm run format` | Formata o projeto com o Prettier |
+| `npm run format:check` | Confere se o projeto está formatado |
 | `npx tsc --noEmit` | Verifica os tipos |
 | `npx next analyze` | Abre o analisador de bundle em `http://localhost:4000` |
 
