@@ -9,11 +9,23 @@ import ProductCategory from "@/components/ProductCategory";
 import { mockCategories } from "@/mocks/categories";
 import { ProductType } from "@/models/product";
 
-function SectionHeader({ title, linkLabel }: { title: string; linkLabel: string }) {
+function SectionHeader({
+  title,
+  linkLabel,
+}: {
+  title: string;
+  linkLabel: string;
+}) {
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-2">
-      <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{title}</h2>
-      <Link prefetch={false} href="/products" className="py-3 text-sm font-medium underline underline-offset-4">
+      <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+        {title}
+      </h2>
+      <Link
+        prefetch={false}
+        href="/products"
+        className="py-3 text-sm font-medium underline underline-offset-4"
+      >
         {linkLabel}
       </Link>
     </div>

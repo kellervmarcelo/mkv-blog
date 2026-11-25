@@ -5,17 +5,31 @@ import Link from "next/link";
 
 import ProductCard from "@/components/ProductCard";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { mockProducts } from "@/mocks";
 import { mockCategories } from "@/mocks/categories";
 
-const SORT_OPTIONS = ["Relevância", "Menor preço", "Maior preço", "Melhor avaliação", "Maior desconto"];
+const SORT_OPTIONS = [
+  "Relevância",
+  "Menor preço",
+  "Maior preço",
+  "Melhor avaliação",
+  "Maior desconto",
+];
 const PAGES = [1, 2, 3, 4, 5, 6];
 
 function FilterTitle({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">{children}</span>
+    <span className="text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+      {children}
+    </span>
   );
 }
 
@@ -77,7 +91,11 @@ function PriceAndOtherFilters({ idPrefix }: { idPrefix: string }) {
           Com desconto acima de 10%
         </label>
         <label className="flex min-h-11 items-center gap-2 text-base lg:min-h-8 lg:text-sm">
-          <input type="checkbox" defaultChecked className="size-4 accent-primary" />
+          <input
+            type="checkbox"
+            defaultChecked
+            className="size-4 accent-primary"
+          />
           Somente em estoque
         </label>
       </div>
@@ -88,8 +106,15 @@ function PriceAndOtherFilters({ idPrefix }: { idPrefix: string }) {
 export default function Products() {
   return (
     <div className="flex flex-col gap-4 py-4 md:gap-5 md:py-6">
-      <nav aria-label="Trilha" className="flex gap-2 text-sm text-muted-foreground">
-        <Link prefetch={false} href="/" className="underline underline-offset-4">
+      <nav
+        aria-label="Trilha"
+        className="flex gap-2 text-sm text-muted-foreground"
+      >
+        <Link
+          prefetch={false}
+          href="/"
+          className="underline underline-offset-4"
+        >
           Início
         </Link>
         <span aria-hidden>/</span>
@@ -98,7 +123,9 @@ export default function Products() {
 
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="flex flex-col gap-1">
-          <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Todos os produtos</h1>
+          <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
+            Todos os produtos
+          </h1>
           <span className="text-sm text-muted-foreground">62 produtos</span>
         </div>
         <div className="hidden items-center gap-3 lg:flex">
@@ -111,7 +138,9 @@ export default function Products() {
 
       <div className="grid grid-cols-2 gap-2 lg:hidden">
         <Sheet>
-          <SheetTrigger className={cn(buttonVariants({ variant: "outline" }), "w-full")}>
+          <SheetTrigger
+            className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+          >
             <SlidersHorizontalIcon />
             Filtros
             <span className="flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
@@ -123,9 +152,14 @@ export default function Products() {
               <span className="h-1 w-10 rounded-full bg-border" />
             </div>
             <div className="flex items-center justify-between border-b py-2 pr-2 pl-4">
-              <SheetTitle className="font-display text-xl font-bold">Filtros</SheetTitle>
+              <SheetTitle className="font-display text-xl font-bold">
+                Filtros
+              </SheetTitle>
               <div className="flex items-center gap-1">
-                <button type="button" className="h-11 px-3 text-sm font-medium text-zinc-700 underline underline-offset-4">
+                <button
+                  type="button"
+                  className="h-11 px-3 text-sm font-medium text-zinc-700 underline underline-offset-4"
+                >
                   Limpar
                 </button>
                 <SheetClose
@@ -142,7 +176,11 @@ export default function Products() {
                 <FilterTitle>Categoria</FilterTitle>
                 <div className="flex flex-wrap gap-2">
                   {mockCategories.map((category) => (
-                    <button key={category.slug} type="button" className="h-9 rounded-full border bg-card px-3 text-sm font-medium">
+                    <button
+                      key={category.slug}
+                      type="button"
+                      className="h-9 rounded-full border bg-card px-3 text-sm font-medium"
+                    >
                       {category.label}
                     </button>
                   ))}
@@ -152,7 +190,12 @@ export default function Products() {
             </div>
 
             <div className="border-t px-4 pt-3 pb-6">
-              <SheetClose className={cn(buttonVariants({ variant: "brand", size: "xl" }), "w-full")}>
+              <SheetClose
+                className={cn(
+                  buttonVariants({ variant: "brand", size: "xl" }),
+                  "w-full",
+                )}
+              >
                 Ver 62 produtos
               </SheetClose>
             </div>
@@ -174,7 +217,10 @@ export default function Products() {
           Em estoque
           <XIcon className="size-4" aria-hidden />
         </button>
-        <button type="button" className="h-8 shrink-0 px-3 text-sm font-medium text-zinc-700 underline underline-offset-4">
+        <button
+          type="button"
+          className="h-8 shrink-0 px-3 text-sm font-medium text-zinc-700 underline underline-offset-4"
+        >
           Limpar
         </button>
       </div>
@@ -214,13 +260,18 @@ export default function Products() {
           </div>
 
           <div className="flex flex-col items-center gap-2 lg:hidden">
-            <span className="text-sm text-muted-foreground">Mostrando 12 de 62</span>
+            <span className="text-sm text-muted-foreground">
+              Mostrando 12 de 62
+            </span>
             <Button variant="outline" className="w-full">
               Carregar mais
             </Button>
           </div>
 
-          <nav aria-label="Paginação" className="hidden flex-wrap items-center justify-center gap-1.5 lg:flex">
+          <nav
+            aria-label="Paginação"
+            className="hidden flex-wrap items-center justify-center gap-1.5 lg:flex"
+          >
             <Button variant="outline" disabled>
               Anterior
             </Button>

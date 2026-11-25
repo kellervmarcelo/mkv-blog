@@ -1,10 +1,23 @@
 "use client";
 
-import { ChevronLeftIcon, ChevronRightIcon, MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from "lucide-react";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MenuIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  XIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { mockCategories } from "@/mocks/categories";
 
@@ -44,7 +57,10 @@ function SearchField({ id, className }: { id: string; className?: string }) {
       <label htmlFor={id} className="sr-only">
         Buscar produtos
       </label>
-      <SearchIcon className="absolute top-3 left-3 size-5 text-zinc-500" aria-hidden />
+      <SearchIcon
+        className="absolute top-3 left-3 size-5 text-zinc-500"
+        aria-hidden
+      />
       <input
         id={id}
         type="search"
@@ -78,7 +94,10 @@ function MobileMenu({ pathname }: { pathname: string }) {
           </SheetClose>
         </div>
 
-        <nav aria-label="Menu" className="flex min-h-0 grow flex-col overflow-y-auto">
+        <nav
+          aria-label="Menu"
+          className="flex min-h-0 grow flex-col overflow-y-auto"
+        >
           <div className="flex flex-col p-2">
             {NAV_LINKS.map((link) => (
               <SheetClose
@@ -87,7 +106,9 @@ function MobileMenu({ pathname }: { pathname: string }) {
                 render={<Link prefetch={false} href={link.href} />}
                 className={cn(
                   "flex h-12 items-center rounded-md px-3 text-base font-medium",
-                  link.href === pathname && link.label !== "Ofertas" && "bg-muted font-semibold",
+                  link.href === pathname &&
+                    link.label !== "Ofertas" &&
+                    "bg-muted font-semibold",
                 )}
               >
                 {link.label}
@@ -119,7 +140,10 @@ function MobileMenu({ pathname }: { pathname: string }) {
                 className="flex h-11 shrink-0 items-center justify-between rounded-md px-3 text-sm text-zinc-700"
               >
                 {category.label}
-                <ChevronRightIcon className="size-4 text-zinc-500" aria-hidden />
+                <ChevronRightIcon
+                  className="size-4 text-zinc-500"
+                  aria-hidden
+                />
               </SheetClose>
             ))}
           </div>
@@ -178,7 +202,9 @@ export default function Header() {
             <Link
               prefetch={false}
               href="/products"
-              aria-label={isCart ? "Continuar comprando" : "Voltar para produtos"}
+              aria-label={
+                isCart ? "Continuar comprando" : "Voltar para produtos"
+              }
               className="flex size-11 shrink-0 items-center justify-center rounded-md hover:bg-accent"
             >
               <ChevronLeftIcon className="size-6" aria-hidden />
@@ -190,15 +216,26 @@ export default function Header() {
           {isCart ? (
             <p className="grow text-center font-display text-xl font-bold">
               Carrinho{" "}
-              <span className="font-sans text-sm font-normal text-muted-foreground">({CART_COUNT})</span>
+              <span className="font-sans text-sm font-normal text-muted-foreground">
+                ({CART_COUNT})
+              </span>
             </p>
           ) : (
-            <Link prefetch={false} href="/" aria-label="MKV Store, início" className="flex grow justify-center">
+            <Link
+              prefetch={false}
+              href="/"
+              aria-label="MKV Store, início"
+              className="flex grow justify-center"
+            >
               <Logo />
             </Link>
           )}
 
-          {isCart ? <span className="size-11 shrink-0" /> : <CartLink active={false} />}
+          {isCart ? (
+            <span className="size-11 shrink-0" />
+          ) : (
+            <CartLink active={false} />
+          )}
         </div>
 
         {!isProduct && !isCart && (

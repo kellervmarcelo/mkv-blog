@@ -8,10 +8,7 @@
     "discountPercentage": 4.12,
     "rating": 4.77,
     "stock": 7,
-    "tags": [
-      "footwear",
-      "athletic shoes"
-    ],
+    "tags": ["footwear", "athletic shoes"],
     "brand": "Nike",
     "sku": "MEN-NIK-NIK-088",
     "weight": 3,
@@ -64,10 +61,7 @@
     "discountPercentage": 4.2,
     "rating": 4.9,
     "stock": 90,
-    "tags": [
-      "footwear",
-      "casual shoes"
-    ],
+    "tags": ["footwear", "casual shoes"],
     "brand": "Puma",
     "sku": "MEN-PUM-PUM-090",
     "weight": 6,
@@ -120,10 +114,7 @@
     "discountPercentage": 18.04,
     "rating": 3.88,
     "stock": 12,
-    "tags": [
-      "footwear",
-      "sports cleats"
-    ],
+    "tags": ["footwear", "sports cleats"],
     "brand": "Nike",
     "sku": "MEN-NIK-NIK-089",
     "weight": 9,
@@ -176,10 +167,7 @@
     "discountPercentage": 4.97,
     "rating": 4.77,
     "stock": 17,
-    "tags": [
-      "footwear",
-      "athletic shoes"
-    ],
+    "tags": ["footwear", "athletic shoes"],
     "brand": "Off White",
     "sku": "MEN-OFF-SPO-091",
     "weight": 7,
@@ -232,10 +220,7 @@
     "discountPercentage": 4.69,
     "rating": 3.65,
     "stock": 24,
-    "tags": [
-      "laptops",
-      "apple"
-    ],
+    "tags": ["laptops", "apple"],
     "brand": "Apple",
     "sku": "LAP-APP-APP-078",
     "weight": 9,
@@ -287,9 +272,7 @@
     "discountPercentage": 9.38,
     "rating": 4.98,
     "stock": 75,
-    "tags": [
-      "laptops"
-    ],
+    "tags": ["laptops"],
     "brand": "Huawei",
     "sku": "LAP-HUA-HUA-080",
     "weight": 9,
@@ -341,10 +324,7 @@
     "discountPercentage": 3.87,
     "rating": 4.92,
     "stock": 99,
-    "tags": [
-      "fashion accessories",
-      "leather bags"
-    ],
+    "tags": ["fashion accessories", "leather bags"],
     "brand": "Heshe",
     "sku": "WOM-HES-HES-173",
     "weight": 3,
@@ -396,10 +376,7 @@
     "discountPercentage": 4.94,
     "rating": 4.41,
     "stock": 60,
-    "tags": [
-      "eyewear",
-      "sunglasses"
-    ],
+    "tags": ["eyewear", "sunglasses"],
     "brand": "Fashion Shades",
     "sku": "SUN-FAS-BLA-154",
     "weight": 1,
@@ -451,10 +428,7 @@
     "discountPercentage": 1.89,
     "rating": 4.37,
     "stock": 29,
-    "tags": [
-      "fragrances",
-      "perfumes"
-    ],
+    "tags": ["fragrances", "perfumes"],
     "brand": "Calvin Klein",
     "sku": "FRA-CAL-CAL-006",
     "weight": 7,
@@ -506,10 +480,7 @@
     "discountPercentage": 16.51,
     "rating": 4.26,
     "stock": 58,
-    "tags": [
-      "fragrances",
-      "perfumes"
-    ],
+    "tags": ["fragrances", "perfumes"],
     "brand": "Chanel",
     "sku": "FRA-CHA-CHA-007",
     "weight": 7,
@@ -561,10 +532,7 @@
     "discountPercentage": 9.37,
     "rating": 4.12,
     "stock": 56,
-    "tags": [
-      "smartphones",
-      "apple"
-    ],
+    "tags": ["smartphones", "apple"],
     "brand": "Apple",
     "sku": "SMA-APP-IPH-123",
     "weight": 8,
@@ -616,10 +584,7 @@
     "discountPercentage": 11.51,
     "rating": 4.58,
     "stock": 80,
-    "tags": [
-      "smartphones",
-      "realme"
-    ],
+    "tags": ["smartphones", "realme"],
     "brand": "Realme",
     "sku": "SMA-REA-REA-130",
     "weight": 3,

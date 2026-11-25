@@ -16,22 +16,34 @@ const FOOTER_LINKS = [
 export default function Footer() {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const hiddenOnMobile = pathname === "/cart" || /^\/products\/[^/]+$/.test(pathname);
+  const hiddenOnMobile =
+    pathname === "/cart" || /^\/products\/[^/]+$/.test(pathname);
 
   return (
-    <footer className={cn("mt-10 bg-primary text-zinc-300", hiddenOnMobile && "hidden md:block")}>
+    <footer
+      className={cn(
+        "mt-10 bg-primary text-zinc-300",
+        hiddenOnMobile && "hidden md:block",
+      )}
+    >
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-16 md:gap-y-6 md:px-6 md:py-10">
         <Link
           prefetch={false}
           href="/"
           aria-label="MKV Store, início"
-          className={cn("self-start md:self-auto", !isHome && "hidden md:inline-flex")}
+          className={cn(
+            "self-start md:self-auto",
+            !isHome && "hidden md:inline-flex",
+          )}
         >
           <Logo size="sm" className="text-primary-foreground" />
         </Link>
         <nav
           aria-label="Rodapé"
-          className={cn("flex flex-col text-sm md:flex-row md:gap-7", !isHome && "hidden md:flex")}
+          className={cn(
+            "flex flex-col text-sm md:flex-row md:gap-7",
+            !isHome && "hidden md:flex",
+          )}
         >
           {FOOTER_LINKS.map((link) => (
             <Link
@@ -44,7 +56,9 @@ export default function Footer() {
             </Link>
           ))}
         </nav>
-        <span className="text-xs text-zinc-400 md:text-sm">Loja fictícia · produtos via DummyJSON</span>
+        <span className="text-xs text-zinc-400 md:text-sm">
+          Loja fictícia · produtos via DummyJSON
+        </span>
       </div>
     </footer>
   );
