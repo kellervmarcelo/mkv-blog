@@ -46,7 +46,7 @@ O método é:
 | Utilitários de classe | `class-variance-authority`, `cn` |
 | Ícones | `lucide-react` |
 | Dados | API pública [DummyJSON](https://dummyjson.com/docs/products) |
-| Qualidade | ESLint 9 com `eslint-config-next` (`core-web-vitals` e `typescript`) |
+| Qualidade | ESLint 9 com `eslint-config-next` (`core-web-vitals` e `typescript`), Prettier 3 (configuração padrão em `.prettierrc.json`) |
 
 Não há suíte de testes configurada.
 
@@ -58,6 +58,7 @@ npm run dev          # desenvolvimento em http://localhost:3000
 npm run build        # build de produção
 npm run start        # serve o build de produção
 npm run lint         # ESLint
+npm run format       # formata com o Prettier
 npx tsc --noEmit     # checagem de tipos
 npx next analyze     # analisador de bundle em http://localhost:4000
 ```

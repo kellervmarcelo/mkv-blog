@@ -8,12 +8,25 @@ import ProductCard from "@/components/ProductCard";
 import ProductCategory from "@/components/ProductCategory";
 import { mockCategories } from "@/mocks/categories";
 import { ProductType } from "@/models/product";
+import { getFeaturedProduct } from "@/lib/product";
 
-function SectionHeader({ title, linkLabel }: { title: string; linkLabel: string }) {
+function SectionHeader({
+  title,
+  linkLabel,
+}: {
+  title: string;
+  linkLabel: string;
+}) {
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-2">
-      <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{title}</h2>
-      <Link prefetch={false} href="/products" className="py-3 text-sm font-medium underline underline-offset-4">
+      <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+        {title}
+      </h2>
+      <Link
+        prefetch={false}
+        href="/products"
+        className="py-3 text-sm font-medium underline underline-offset-4"
+      >
         {linkLabel}
       </Link>
     </div>
@@ -22,14 +35,24 @@ function SectionHeader({ title, linkLabel }: { title: string; linkLabel: string 
 
 export default function Home() {
   const [products, setProducts] = useState<ProductType[]>();
+  const featuredProduct = products ? getFeaturedProduct(products) : null;
 
   useEffect(() => {
     async function getProducts() {
-      const response = await fetch("https://dummyjson.com/products").then(
-        (res) => res.json(),
-      );
+      try {
+        const response = await fetch("https://dummyjson.com/products");
 
-      setProducts(response["products"]);
+        if (!response.ok) {
+          throw new Error("Problemas ao carregar a lista");
+        }
+
+        const productListJSON = await response.json();
+        const productList = productListJSON["products"];
+
+        setProducts(productList);
+      } catch (e) {
+        console.log("error", e);
+      }
     }
 
     getProducts();
@@ -37,7 +60,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      {featuredProduct && <Hero product={featuredProduct} />}
 
       <section className="flex flex-col gap-3 py-4 md:gap-5 md:py-6">
         <SectionHeader title="Categorias" linkLabel="Ver todas" />

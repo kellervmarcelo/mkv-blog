@@ -13,15 +13,17 @@ export default function NotFoundContent() {
         className="flex items-center gap-3 font-display text-8xl leading-none font-bold tracking-tighter md:gap-4 md:text-9xl"
       >
         <span>4</span>
-        <span className="rounded-3xl bg-brand px-5 pb-3 text-brand-foreground md:px-6">0</span>
+        <span className="rounded-3xl bg-brand px-5 pb-3 text-brand-foreground md:px-6">
+          0
+        </span>
         <span>4</span>
       </div>
       <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
         Essa página saiu de estoque
       </h1>
       <p className="max-w-lg text-base leading-relaxed text-muted-foreground md:text-lg">
-        O link pode estar quebrado, ou o produto não existe mais no catálogo. Tente buscar ou volte
-        para o início.
+        O link pode estar quebrado, ou o produto não existe mais no catálogo.
+        Tente buscar ou volte para o início.
       </p>
 
       <div className="flex w-full max-w-md flex-col gap-2 text-left">
@@ -30,7 +32,10 @@ export default function NotFoundContent() {
         </label>
         <div className="flex gap-2">
           <div className="relative grow">
-            <SearchIcon className="absolute top-3 left-3 size-5 text-zinc-500" aria-hidden />
+            <SearchIcon
+              className="absolute top-3 left-3 size-5 text-zinc-500"
+              aria-hidden
+            />
             <input
               id="not-found-search"
               placeholder="Ex.: tênis, perfume, notebook"
@@ -42,10 +47,18 @@ export default function NotFoundContent() {
       </div>
 
       <div className="flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-        <Link prefetch={false} href="/" className={buttonVariants({ variant: "brand", size: "lg" })}>
+        <Link
+          prefetch={false}
+          href="/"
+          className={buttonVariants({ variant: "brand", size: "lg" })}
+        >
           Voltar ao início
         </Link>
-        <Link prefetch={false} href="/products" className={buttonVariants({ variant: "outline", size: "lg" })}>
+        <Link
+          prefetch={false}
+          href="/products"
+          className={buttonVariants({ variant: "outline", size: "lg" })}
+        >
           Ver todos os produtos
         </Link>
       </div>

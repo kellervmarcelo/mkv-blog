@@ -1,0 +1,5 @@
+# Gerado e mantido pelo npm
+package-lock.json
+
+# Documentação escrita à mão: o Prettier alinharia todas as tabelas
+*.md
