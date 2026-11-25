@@ -1,13 +1,10 @@
 "use client";
 
-import ProductDetail from "@/components/ProductDetail";
-import { mockProducts } from "@/mocks";
+import Product from "@/components/Product";
+import { useParams } from "next/navigation";
 
-export default function Product() {
-  return (
-    <ProductDetail
-      product={mockProducts[0]}
-      related={mockProducts.slice(1, 5)}
-    />
-  );
+export default function ProductPage() {
+  const { id } = useParams<{ id: string }>();
+
+  return <Product key={id} id={id} />;
 }

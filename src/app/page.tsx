@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import ProductCategory from "@/components/ProductCategory";
 import { mockCategories } from "@/mocks/categories";
 import { ProductType } from "@/models/product";
+import { getFeaturedProduct } from "@/lib/product";
 
 function SectionHeader({
   title,
@@ -34,14 +35,24 @@ function SectionHeader({
 
 export default function Home() {
   const [products, setProducts] = useState<ProductType[]>();
+  const featuredProduct = products ? getFeaturedProduct(products) : null;
 
   useEffect(() => {
     async function getProducts() {
-      const response = await fetch("https://dummyjson.com/products").then(
-        (res) => res.json(),
-      );
+      try {
+        const response = await fetch("https://dummyjson.com/products");
 
-      setProducts(response["products"]);
+        if (!response.ok) {
+          throw new Error("Problemas ao carregar a lista");
+        }
+
+        const productListJSON = await response.json();
+        const productList = productListJSON["products"];
+
+        setProducts(productList);
+      } catch (e) {
+        console.log("error", e);
+      }
     }
 
     getProducts();
@@ -49,7 +60,7 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
+      {featuredProduct && <Hero product={featuredProduct} />}
 
       <section className="flex flex-col gap-3 py-4 md:gap-5 md:py-6">
         <SectionHeader title="Categorias" linkLabel="Ver todas" />

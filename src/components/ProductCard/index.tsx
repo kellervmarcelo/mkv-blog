@@ -29,7 +29,7 @@ export default function ProductCard({
   return (
     <Link
       prefetch={false}
-      href="/products/88"
+      href={`/products/${product.id}`}
       className={cn(
         "group flex flex-col overflow-hidden rounded-xl border bg-card transition-colors duration-300 outline-none hover:border-zinc-300 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 motion-reduce:transition-none",
         className,

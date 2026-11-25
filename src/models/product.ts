@@ -12,6 +12,8 @@ type ProductReviewType = {
   reviewerEmail: string;
 };
 
+export type AvailabilityStatus = "In Stock" | "Low Stock" | "Out of Stock";
+
 export type ProductType = {
   id: number;
   title: string;
@@ -28,7 +30,7 @@ export type ProductType = {
   dimensions: ProductDimensionsType;
   warrantyInformation: string;
   shippingInformation: string;
-  availabilityStatus: string;
+  availabilityStatus: AvailabilityStatus;
   reviews: ProductReviewType[];
   returnPolicy: string;
   minimumOrderQuantity: number;

@@ -5,11 +5,43 @@ import ProductCard from "@/components/ProductCard";
 import QuantitySelector from "@/components/QuantitySelector";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ProductType } from "@/models/product";
+import { AvailabilityStatus, ProductType } from "@/models/product";
+import {
+  getDiscountBadge,
+  getFormattedPrice,
+  getPriceWithDiscount,
+} from "@/lib/price";
 
 type ProductDetailProps = {
   product: ProductType;
   related: ProductType[];
+};
+
+type ProductAvailabilityAttr = {
+  label: string;
+  badgeColor: string;
+  description: (qty: number) => string | null;
+};
+
+const productAvailabilityStatusMap: Record<
+  AvailabilityStatus,
+  ProductAvailabilityAttr
+> = {
+  "In Stock": {
+    badgeColor: "bg-success",
+    label: "Em estoque",
+    description: (qty: number) => `${qty} unidades`,
+  },
+  "Low Stock": {
+    badgeColor: "bg-yellow-500",
+    label: "Estoque baixo",
+    description: (qty: number) => `Restam ${qty} unidades`,
+  },
+  "Out of Stock": {
+    badgeColor: "bg-destructive",
+    label: "Sem estoque",
+    description: () => null,
+  },
 };
 
 export default function ProductDetail({
@@ -22,6 +54,21 @@ export default function ProductDetail({
     { label: "Devolução", value: product.returnPolicy },
     { label: "SKU", value: product.sku, desktopOnly: true },
   ];
+
+  const productAvailability =
+    productAvailabilityStatusMap[product.availabilityStatus] ??
+    productAvailabilityStatusMap["Out of Stock"];
+
+  const productAvailabilityDescription = productAvailability.description(
+    product.stock,
+  );
+
+  const formattedProductPriceWithDiscount = getFormattedPrice(
+    getPriceWithDiscount(product.price, product.discountPercentage),
+  );
+
+  const discountBadge = getDiscountBadge(product.discountPercentage);
+  const showDiscountBadge = discountBadge !== null;
 
   return (
     <div className="flex flex-col gap-8 pb-4 md:gap-12 md:py-6">
@@ -43,7 +90,7 @@ export default function ProductDetail({
             href="/products"
             className="underline underline-offset-4"
           >
-            Calçados masculinos
+            {product.category}
           </Link>
           <span aria-hidden>/</span>
           <span className="text-foreground">{product.title}</span>
@@ -57,9 +104,11 @@ export default function ProductDetail({
                 alt={product.title}
                 className="block w-full"
               />
-              <span className="absolute top-4 left-4 rounded-full bg-brand px-3 py-1 text-xs font-bold text-brand-foreground">
-                −4%
-              </span>
+              {showDiscountBadge && (
+                <span className="absolute top-2 left-2 rounded-full bg-brand px-2.5 py-0.5 text-xs font-bold text-brand-foreground md:top-3 md:left-3">
+                  -{discountBadge}%
+                </span>
+              )}
               <div className="absolute inset-x-0 bottom-2 flex justify-center md:hidden">
                 {product.images.map((image, index) => (
                   <span
@@ -99,7 +148,7 @@ export default function ProductDetail({
           <div className="flex min-w-0 flex-col gap-5">
             <div className="flex flex-col gap-2">
               <span className="text-sm font-medium text-muted-foreground">
-                {product.brand} · Calçados masculinos
+                {product.brand} · {product.category}
               </span>
               <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
                 {product.title}
@@ -112,28 +161,42 @@ export default function ProductDetail({
                   className="size-4 fill-current text-foreground"
                   aria-hidden
                 />
-                <span className="font-semibold text-foreground">4,8</span> de 5
-                · <span className="underline">ver avaliações</span>
+                <span className="font-semibold text-foreground">
+                  {product.rating}
+                </span>{" "}
+                de 5 · <span className="underline">ver avaliações</span>
               </a>
             </div>
 
             <div className="flex flex-wrap items-baseline gap-2 md:gap-3">
               <span className="font-display text-4xl font-bold tracking-tight">
-                US$ 143,81
+                {formattedProductPriceWithDiscount}
               </span>
-              <span className="text-sm text-muted-foreground line-through md:text-base">
-                US$ 149,99
-              </span>
-              <span className="hidden rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-brand md:inline">
-                4% off
-              </span>
+              {showDiscountBadge && (
+                <span className="text-sm text-muted-foreground line-through md:text-base">
+                  {getFormattedPrice(product.price)}
+                </span>
+              )}
+              {showDiscountBadge && (
+                <span className="hidden rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-brand md:inline">
+                  -{discountBadge}%
+                </span>
+              )}
             </div>
 
             <div className="flex items-center gap-2 text-sm">
-              <span className="size-2 rounded-full bg-success" />
+              <span
+                className={cn(
+                  "size-2 rounded-full",
+                  productAvailability.badgeColor,
+                )}
+              />
               <span>
-                <strong className="font-semibold">Em estoque</strong> · restam 7
-                unidades
+                <strong className="font-semibold">
+                  {productAvailability.label}
+                </strong>
+                {productAvailabilityDescription !== null ? " · " : ""}
+                {productAvailabilityDescription}
               </span>
             </div>
 
@@ -191,9 +254,9 @@ export default function ProductDetail({
           <h2 className="font-display text-xl font-bold md:text-3xl md:tracking-tight">
             Avaliações
           </h2>
-          {product.reviews.map((review) => (
+          {product.reviews.map((review, index) => (
             <article
-              key={review.reviewerName}
+              key={index}
               className="flex flex-col gap-1.5 rounded-xl border bg-card p-4"
             >
               <div className="flex justify-between gap-2 text-sm">
@@ -242,7 +305,9 @@ export default function ProductDetail({
       <div className="sticky bottom-0 z-10 -mx-4 -mb-4 flex items-center gap-3 border-t bg-card px-4 pt-3 pb-6 md:hidden">
         <div className="flex shrink-0 flex-col">
           <span className="text-xs text-muted-foreground">Total</span>
-          <span className="font-display text-xl font-bold">US$ 143,81</span>
+          <span className="font-display text-xl font-bold">
+            {formattedProductPriceWithDiscount}
+          </span>
         </div>
         <Button
           variant="brand"

@@ -2,12 +2,14 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ProductType } from "@/models/product";
+import {
+  getDiscountBadge,
+  getFormattedPrice,
+  getPriceWithDiscount,
+} from "@/lib/price";
 
-const HERO_IMAGE =
-  "https://cdn.dummyjson.com/product-images/laptops/apple-macbook-pro-14-inch-space-grey/1.webp";
-const HERO_TITLE = "Apple MacBook Pro 14 Inch Space Grey";
-
-export default function Hero() {
+export default function Hero({ product }: { product: ProductType }) {
   return (
     <section className="py-4 md:py-6">
       <div className="flex flex-col overflow-hidden rounded-3xl bg-primary text-primary-foreground md:flex-row">
@@ -25,10 +27,14 @@ export default function Hero() {
 
           <Link
             prefetch={false}
-            href="/products/78"
+            href={`/products/${product.id}`}
             className="overflow-hidden rounded-2xl bg-zinc-800 md:hidden"
           >
-            <img src={HERO_IMAGE} alt={HERO_TITLE} className="block w-full" />
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+              className="block w-full"
+            />
           </Link>
 
           <div className="flex flex-wrap gap-3">
@@ -57,25 +63,31 @@ export default function Hero() {
 
         <Link
           prefetch={false}
-          href="/products/78"
+          href={`/products/${product.id}`}
           className="hidden flex-col justify-end gap-1.5 bg-zinc-900 p-7 md:flex md:flex-1"
         >
           <span className="flex grow items-center justify-center overflow-hidden rounded-2xl bg-zinc-800">
             <img
-              src={HERO_IMAGE}
-              alt={HERO_TITLE}
+              src={product.thumbnail}
+              alt={product.title}
               className="block max-h-96 w-full object-contain"
             />
           </span>
-          <span className="mt-3 text-sm text-zinc-400">Apple · Notebooks</span>
-          <span className="text-xl font-semibold">{HERO_TITLE}</span>
+          <span className="mt-3 text-sm text-zinc-400">
+            {product.brand} · {product.category}
+          </span>
+          <span className="text-xl font-semibold">{product.title}</span>
           <span className="flex flex-wrap items-baseline gap-2">
             <span className="font-display text-2xl font-bold text-brand">
-              US$ 1.906,19
+              {getFormattedPrice(
+                getPriceWithDiscount(product.price, product.discountPercentage),
+              )}
             </span>
-            <span className="text-sm text-zinc-400 line-through">
-              US$ 1.999,99
-            </span>
+            {getDiscountBadge(product.discountPercentage) !== null && (
+              <span className="text-sm text-zinc-400 line-through">
+                {getFormattedPrice(product.price)}
+              </span>
+            )}
           </span>
         </Link>
       </div>
