@@ -3,8 +3,7 @@
 import { SlidersHorizontalIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 
-import ProductCard from "@/components/ProductCard";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -13,8 +12,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { mockProducts } from "@/mocks";
 import { mockCategories } from "@/mocks/categories";
+import ProductList from "@/components/ProductList";
+import { Suspense } from "react";
 
 const SORT_OPTIONS = [
   "Relevância",
@@ -23,7 +23,6 @@ const SORT_OPTIONS = [
   "Melhor avaliação",
   "Maior desconto",
 ];
-const PAGES = [1, 2, 3, 4, 5, 6];
 
 function FilterTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -252,42 +251,9 @@ export default function Products() {
           <PriceAndOtherFilters idPrefix="aside" />
         </aside>
 
-        <div className="flex min-w-0 flex-col gap-7 lg:col-span-3">
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
-            {mockProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          <div className="flex flex-col items-center gap-2 lg:hidden">
-            <span className="text-sm text-muted-foreground">
-              Mostrando 12 de 62
-            </span>
-            <Button variant="outline" className="w-full">
-              Carregar mais
-            </Button>
-          </div>
-
-          <nav
-            aria-label="Paginação"
-            className="hidden flex-wrap items-center justify-center gap-1.5 lg:flex"
-          >
-            <Button variant="outline" disabled>
-              Anterior
-            </Button>
-            {PAGES.map((number) => (
-              <Button
-                key={number}
-                size="icon"
-                variant={number === 1 ? "default" : "outline"}
-                aria-current={number === 1 ? "page" : undefined}
-              >
-                {number}
-              </Button>
-            ))}
-            <Button variant="outline">Próxima</Button>
-          </nav>
-        </div>
+        <Suspense>
+          <ProductList />
+        </Suspense>
       </div>
     </div>
   );
