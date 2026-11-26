@@ -157,6 +157,7 @@ export default function ProductList() {
               </Button>
             ) : (
               <Link
+                prefetch={false}
                 href={{
                   pathname: "/products",
                   query: { page: pageNumber - 1 },
@@ -175,6 +176,7 @@ export default function ProductList() {
 
               return (
                 <Link
+                  prefetch={false}
                   key={index + 1}
                   className={cn(
                     buttonVariants({
@@ -195,6 +197,7 @@ export default function ProductList() {
               </Button>
             ) : (
               <Link
+                prefetch={false}
                 href={{
                   pathname: "/products",
                   query: { page: pageNumber + 1 },

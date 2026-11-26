@@ -100,7 +100,7 @@ O alias `@/*` aponta para `src/*`. Os tokens de design ficam em `src/app/globals
 | Google Fonts via `<link>` bloqueante, com vários eixos | `src/app/layout.tsx` | FCP, LCP, CLS |
 | Fontes sem `next/font`, servidas por terceiros | `src/app/layout.tsx` | FCP, LCP, CLS |
 | `cacheComponents` e `partialPrefetching` desativados | `next.config.ts` | TTFB, navegação |
-| `prefetch={false}` em todos os `next/link` | Todos os componentes e páginas, exceto os links da paginação do `ProductList` (pendente) | Navegação |
+| `prefetch={false}` em todos os `next/link` | Todos os componentes e páginas | Navegação |
 | Todos os 30 produtos da API, com todos os campos, para exibir 8 | `src/app/page.tsx` | LCP |
 
 ### Limitações do baseline
